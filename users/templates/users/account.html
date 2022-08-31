@@ -1,0 +1,82 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<style>
+  td {
+    padding: 10px;
+  }
+  tr > * + * {
+  padding-left: 5em;
+  }
+</style> 
+  <!-- Main Section -->
+  <main class="settingsPage profile my-md">
+    <div class="container">
+      <div class="layout">
+        <div class="column column--1of3">
+          <div class="card text-center">
+            <div class="card__body dev">
+              <a class="tag tag--pill tag--main settings__btn" href="{% url 'edit-account' %}"><i class="im im-edit"></i> Edit</a>
+              <img class="avatar avatar--xl dev__avatar" src="{{ profile.profile_image.url }}" />
+              <h2 class="dev__name">{{profile.name}}</h2>
+              <p class="dev__location">Based in {{profile.location}}</p>
+              <br>
+              <a href="#" class="btn btn--sub btn--lg">Send Message </a>
+            </div>
+          </div>
+        </div>
+        <div class="column column--2of3">
+          <div class="devInfo">
+            <h3 class="devInfo__title">About Me</h3>
+            <p class="devInfo__about">
+              {{profile.bio}}
+            </p>
+          </div>
+
+          <div class="settings">
+            <h3 class="settings__title">Animes({{animes.count}})</h3>
+            <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{% url 'animes' %}"><i class="im im-plus"></i> Add Anime</a>
+          </div>
+          
+          <table class="settings__table">
+            {% for anime in animes %}
+            <tr>
+              <td class="settings__thumbnail">
+                <a href="{% url 'anime' anime.id %}"><img src="{{anime.featured_image.url}}" alt="Anime Thumbnail" /></a>
+              </td>
+              <td class="settings__tableInfo">
+                <a href="{% url 'anime' anime.id %}">{{anime.title}}</a>
+                <p>
+                  {{anime.description|slice:"150"}}
+                </p>
+              </td>
+              <td class="settings__tableInfo">
+                <a href="#">Vote</a>
+                <p>
+                  {% for review in anime.review_set.all %}
+                  {% if review.owner == profile %} 
+                    {{review}}
+                  {% endif %}
+                  {% endfor %}
+                </p>
+              </td>
+              <td class="settings__tableActions">
+                <a class="tag tag--pill tag--main settings__btn" href="{% url 'anime' anime.id %}"></i>
+                  View</a>
+                <a class="tag tag--pill tag--main settings__btn" href="{% url 'edit-anime' anime.id %}"></i>
+                  Edit</a>
+                <a class="tag tag--pill tag--main settings__btn" href="{% url 'delete-anime' anime.id %}"><i class="im im-x-mark-circle-o"></i>
+                  Delete</a>
+              </td>
+            </tr>
+            {% endfor %}
+
+          </table>
+            
+        </div>
+      </div>
+    </div>
+  </main>
+
+  {% endblock content %}

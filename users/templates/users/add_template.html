@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<main class="formPage my-xl">
+    <div class="content-box">
+        <div class="formWrapper">
+
+            <form class="form" method="POST">
+                {% csrf_token %}
+                <p>Add "{{anime}}" to your account?</p>
+
+                <form class="form" action="{% url 'anime' anime.id %}" method="POST">
+                    {% csrf_token %}
+                    
+                    {% for field in form %}
+                      <div class="form__field">
+                        <div class="singleProject__info">
+                          {{field.label}}
+                        </div>
+                        {{field}}
+                      </div>
+                    {% endfor %}
+                    <a class="btn btn--sub btn--lg  my-md" href="{% url 'anime' anime.id %}">&#x2190 Go Back</a>
+                    <input class="btn btn--sub btn--lg  my-md" type="submit" value="Add" />
+                  </form>
+            </form>
+        </div>
+    </div>
+</main>
+
+{% endblock content %}

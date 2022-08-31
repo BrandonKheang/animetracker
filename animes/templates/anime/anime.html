@@ -1,0 +1,90 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+  <!-- Main Section -->
+  <main class="singleProject my-md">
+    <div class="container">
+      <div class="layout">
+        <div class="column column--1of3">
+          <h3 class="singleProject__subtitle">Genres</h3>
+          <div class="singleProject__toolStack">
+
+            {% for tag in anime.tags.all %}
+            <a class="tag tag--pill tag--main settings__btn" href="{% url 'genres' tag.id %}"></i>
+              {{tag}}</a>
+            {% endfor %}
+          </div>
+
+          {% if anime.source_link %}
+          <a class="singleAnime__liveLink" href="{{anime.source_link}}" target="_blank"><i class="im im-external-link"></i>Watch Here
+          </a>
+          {% endif %}
+
+          {% if request.user.is_authenticated %}
+            {% if anime not in request.user.profile.animes.all %}
+              <div class="card__body dev">
+                <a href="{% url 'add-anime' anime.id %}" class="btn btn--sub btn--lg">Add Anime </a>
+              </div>
+              {% endif %}
+          {% endif %}
+
+        </div>
+        <div class="column column--2of3">
+          <img class="singleProject__preview" src="{{ anime.featured_image.url }}" alt="portfolio thumbnail" />
+          <h2 class="singleProject__title">{{anime.title}}</h2>
+          <h3 class="singleProject__subtitle">Description</h3>
+          <div class="singleProject__info">
+            {{anime.description|linebreaksbr}}
+          </div>
+
+          <div class="comments">
+            <h3 class="singleProject__subtitle">Ratings</h3>
+            <h5 class="project--rating">
+              {{anime.vote_ratio}}% Positive Ratings ({{anime.vote_total}} Vote{{anime.vote_total|pluralize:"s"}})
+            </h5>
+            {% if request.user.is_authenticated %}
+            <form class="form" action="{% url 'anime' anime.id %}" method="POST">
+              {% csrf_token %}
+              
+              {% for field in form %}
+                <div class="form__field">
+                  <div class="singleProject__info">
+                    {{field.label}}
+                  </div>
+                  {{field}}
+                </div>
+              {% endfor %}
+              <input class="btn btn--sub btn--lg" type="submit" value="Submit Review" />
+            </form>
+            {% else %}
+              <a href="{% url 'login' %}?next={{request.path}}">Please login to leave a review</a>
+            {% endif %}
+            <div class="commentList">
+              {% for review in anime.review_set.all %}
+              {% if review.body %}
+              <div class="comment">
+                <a href="{% url 'user-profile' review.owner.id %}">
+                  <img class="avatar avatar--md"
+                    src="{{review.owner.profile_image.url}}" alt="user" />
+                </a>
+                <div class="comment__details">
+                  <a href="{% url 'user-profile' review.owner.id %}" class="comment__author">{{review.owner.name}}</a>
+                  <p class="comment__info">{{review.body|linebreaksbr}}</p>
+                </div>
+                {% if review.owner == request.user.profile %}
+                <a class="tag tag--pill tag--main settings__btn" href="{% url 'delete-review' review.id %}"></i>
+                  Delete</a>
+                {% endif %}
+              </div>
+              {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </main>
+
+{% endblock content %}

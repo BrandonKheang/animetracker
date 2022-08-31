@@ -1,0 +1,65 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+  <!-- Main Section -->
+  <main class="animes">
+    <section class="hero-section text-center">
+      <div class="container container--narrow">
+        <div class="hero-section__box">
+          <h2>Search for <span>Animes</span></h2>
+        </div>
+
+        <div class="hero-section__search">
+          <form id='searchForm' class="form" action="{% url 'animes' %}" method="get">
+            <div class="form__field">
+              <label for="formInput#search">Search By Anime </label>
+              <input class="input input--text" id="formInput#search" type="text" name="search_query"
+                value="{{search_query}}" placeholder="Search by Anime Title" />
+            </div>
+
+            <input class="btn btn--sub btn--lg" type="submit" value="Search" />
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- Search Result: -->
+    <section class="animesList">
+      <div class="container">
+        <div class="grid grid--three">
+
+          {% for anime in animes %}    
+          <div class="column">
+            <div class="card anime">
+              <a href="{% url 'anime' anime.id %}" class="anime">
+                <div class="image-container">
+                    <img class="anime__thumbnail" src="{{anime.featured_image.url}}" alt="anime thumbnail"/>
+                </div>
+                <div class="card__body">
+                  <h3 class="anime__title">{{anime.title}}</h3>
+                  <p class="anime--rating">
+                    <span style="font-weight: bold;">{{anime.vote_ratio}}%</span> Positive
+                    Ratings ({{anime.vote_total}} Vote{{anime.vote_total|pluralize:"s"}})
+                  </p>
+                  <div class="anime__tags">
+                    {% for tag in anime.tags.all %}
+                      <span class="tag tag--pill tag--main">
+                        <small>{{tag}}</small>
+                      </span>
+                    {% endfor %}  
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    {% include 'pagination.html' with queryset=animes custom_range=custom_range %}
+
+  </main>
+
+
+{% endblock content %}
