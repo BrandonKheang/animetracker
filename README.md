@@ -1,3 +1,3 @@
 # animetracker
 
-Demonstration available at: http://52.13.197.183/
+Demonstration available at: http://animetracker.online/
