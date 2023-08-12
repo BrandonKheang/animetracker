@@ -2,7 +2,7 @@
 
 ## A website which allows users to track the anime they've watched. Demonstration available at: http://animetracker.online/
 
-This website was built in Python using Django. It's hosted on AWS using Gunicorn and Nginx. Users may access the following features:
+This website was built in Python using Django. It's hosted on AWS using Gunicorn and Nginx. The website is kept live 24/7 using Supervisor. Users may access the following features:
 
 - Browse anime by genre stored in an SQL database
 - Functional search bar and pagination
