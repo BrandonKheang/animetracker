@@ -13,5 +13,43 @@ This website was built in Python using Django. It's hosted on AWS using Gunicorn
 - Logged in users may leave reviewes on animes and delete reviews they have left
 - Logged in users may reset their password through email
 
+## Getting Started
 
+### Prerequisites
 
+-Django
+```
+pip install django
+```
+-Pillow
+```
+pip install pillow
+```
+-whiteniose
+```
+pip install whitenoise
+```
+
+### Installation
+
+1. Clone the repository
+```
+git clone https://github.com/BrandonKheang/animetracker.git
+```
+2. Go to cloned repository directory
+3. Create database migrations
+```
+python3 manage.py makemigrations
+```
+4. Apply the migrations
+```
+python3 manage.py migrate
+```
+5. Create an admin user and provide a username and password
+```
+python3 manage.py createsuperuser
+```
+6. Start up the server
+```
+python3 manage.py runserver
+```
