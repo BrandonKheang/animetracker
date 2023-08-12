@@ -25,7 +25,7 @@ pip install django
 ```
 pip install pillow
 ```
--whiteniose
+-whitenoise
 ```
 pip install whitenoise
 ```
