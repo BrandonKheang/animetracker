@@ -1,4 +1,4 @@
-# animetracker
+# Anime Tracker
 
 ## A website which allows users to track the anime they've watched. Demonstration available at: http://animetracker.online/
 
