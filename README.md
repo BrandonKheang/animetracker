@@ -4,7 +4,7 @@
 
 This website was built in Python using Django. It's hosted on AWS using Gunicorn and Nginx. The website is kept live 24/7 using Supervisor. Users may access the following features:
 
-- Browse anime by genre stored in an SQL database
+- Browse anime stored in an SQL database by genre
 - Functional search bar and pagination
 - Create an account to add or remove anime from their personal list
 - Browse other users' lists 
