@@ -17,6 +17,14 @@ This website was built in Python using Django. It's hosted on AWS using Gunicorn
 
 ### Prerequisites
 
+-Python
+```
+[https://www.python.org/downloads/](https://www.python.org/ftp/python/3.11.4/python-3.11.4-amd64.exe)
+```
+-pip
+```
+python get-pip.py
+```
 -Django
 ```
 pip install django
@@ -30,7 +38,7 @@ pip install pillow
 pip install whitenoise
 ```
 
-### Installation
+### Running Locally
 
 1. Clone the repository
 ```
