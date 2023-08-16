@@ -19,7 +19,7 @@ This website was built in Python using Django. It's hosted on AWS using Gunicorn
 
 -Python
 ```
-[https://www.python.org/downloads/](https://www.python.org/ftp/python/3.11.4/python-3.11.4-amd64.exe)
+https://www.python.org/ftp/python/3.11.4/python-3.11.4-amd64.exe
 ```
 -pip
 ```
@@ -42,7 +42,7 @@ pip install whitenoise
 
 1. Clone the repository
 ```
-git clone https://github.com/BrandonKheang/animetracker.git
+git clone https://github.com/BrandonKheang/animetracker
 ```
 2. Go to cloned repository directory
 3. Create database migrations
